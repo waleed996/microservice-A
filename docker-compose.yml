@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  microservice-a:
+    build:
+      context: .
+    ports:
+      - "8001:8000"
+    depends_on:
+      - rabbitmq
+
+  microservice-b:
+    build:
+      context: ../microservice-B
+    ports:
+      - "8002:8000"
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3.12.0
+    ports:
+      - "5672:5672"
+      - "15672:15672"
